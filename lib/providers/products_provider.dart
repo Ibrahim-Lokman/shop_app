@@ -38,12 +38,29 @@ class ProductsProvider with ChangeNotifier {
     ),
   ];
 
+  var _favoriteOnly = false;
+
   List<Product> get items {
+    if(_favoriteOnly) {
+      return _items.where((prodItem) => prodItem.isFavorite).toList();
+    }
     return [..._items];
   }
 
   Product findById(String id) {
     return _items.firstWhere((prod) => prod.id == id);
+  }
+
+  void showFavoritesOnly(){
+    _favoriteOnly = true;
+    notifyListeners();
+  }
+
+  void showAll(){
+    _favoriteOnly = false;
+    notifyListeners();
+
+
   }
 
   void addProduct() {
