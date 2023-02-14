@@ -41,16 +41,21 @@ class ProductsProvider with ChangeNotifier {
   var _favoriteOnly = false;
 
   List<Product> get items {
-    if(_favoriteOnly) {
-      return _items.where((prodItem) => prodItem.isFavorite).toList();
-    }
+   // if(_favoriteOnly) {
+   //   return _items.where((prodItem) => prodItem.isFavorite).toList();
+   // }
     return [..._items];
+  }
+
+  List<Product> get favoriteItems {
+    return _items.where((prodItem) => prodItem.isFavorite).toList();
   }
 
   Product findById(String id) {
     return _items.firstWhere((prod) => prod.id == id);
   }
 
+/*
   void showFavoritesOnly(){
     _favoriteOnly = true;
     notifyListeners();
@@ -59,9 +64,8 @@ class ProductsProvider with ChangeNotifier {
   void showAll(){
     _favoriteOnly = false;
     notifyListeners();
-
-
   }
+*/
 
   void addProduct() {
    // _items.add(value);
