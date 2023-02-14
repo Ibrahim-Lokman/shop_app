@@ -9,13 +9,13 @@ class ProductsGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     final productsData =  Provider.of<ProductsProvider>(context);
     final products = productsData.items;
-    print("daaaaaaaaaaaaaaaaaa");
+  
     return GridView.builder(
       padding: EdgeInsets.all(10) ,
       itemCount: products.length,
       
-      itemBuilder: (ctx, i) => ChangeNotifierProvider(
-        create: (c) => products[i] ,
+      itemBuilder: (ctx, i) => ChangeNotifierProvider.value(
+        value: products[i] ,
         child: ProductItem(
 
         ),
