@@ -10,11 +10,11 @@ class ProductItem extends StatelessWidget {
   final String imageUrl;
 
   ProductItem( 
-    {
-      required this.id,
-      required this.title,
-      required this.imageUrl
-    }
+    
+      @required this.id,
+      @required this.title,
+      @required this.imageUrl
+    
   );
 
   @override
