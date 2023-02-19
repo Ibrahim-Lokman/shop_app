@@ -109,10 +109,9 @@ class _EditProductScreenState extends State<EditProductScreen> {
                   ),
                 ],
               ),
-
             ],
           )
-          ),
+        ),
       ),
     );
   }
