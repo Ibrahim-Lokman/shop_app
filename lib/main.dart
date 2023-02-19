@@ -1,40 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shop_app/providers/cart_provider.dart';
-import 'package:shop_app/providers/products_provider.dart';
-import 'package:shop_app/screens/product_detail_screen.dart';
-import 'package:shop_app/screens/products_overview_screen.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import './screens/cart_screen.dart';
+import './screens/products_overview_screen.dart';
+import './screens/product_detail_screen.dart';
+import './providers/products.dart';
+import './providers/cart.dart';
+import './providers/orders.dart';
+import './screens/orders_screen.dart';
+
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create : (ctx) => ProductsProvider(), 
-          ),
+          create: (_) => Products(),
+        ),
         ChangeNotifierProvider(
-          create : (ctx) => CartProvider(), 
-          ),
-
+          create: (_) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => Orders(),
+        ),
       ],
       child: MaterialApp(
-        title: 'SHOP APP',
-        theme: ThemeData(
-          primarySwatch: Colors.cyan,
-          accentColor: Color.fromARGB(255, 214, 131, 104),
-          fontFamily: 'Lato',
-        ),
-        home: ProductOverviewScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-        },
-      ),
+          title: 'MyShop',
+          theme: ThemeData(
+            primarySwatch: Colors.purple,
+            accentColor: Colors.deepOrange,
+            fontFamily: 'Lato',
+          ),
+          home: ProductsOverviewScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
+          }),
     );
   }
 }

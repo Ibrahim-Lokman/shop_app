@@ -1,8 +1,8 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import './product.dart';
 
-class ProductsProvider with ChangeNotifier {
+class Products with ChangeNotifier {
   List<Product> _items = [
     Product(
       id: 'p1',
@@ -38,7 +38,7 @@ class ProductsProvider with ChangeNotifier {
     ),
   ];
 
-  var _favoriteOnly = false;
+  //var _favoriteOnly = false;
 
   List<Product> get items {
    // if(_favoriteOnly) {
