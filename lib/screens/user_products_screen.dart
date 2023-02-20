@@ -7,6 +7,8 @@ import 'package:shop_app/providers/products.dart';
 import 'package:shop_app/screens/edit_product_screen.dart';
 import 'package:shop_app/widgets/user_product_item.dart';
 
+import '../widgets/app_drawer.dart';
+
 class UserProductsScreen extends StatelessWidget {
   static const routeName = '/user-products';
   @override
@@ -24,6 +26,7 @@ class UserProductsScreen extends StatelessWidget {
           ),
         ],
       ),
+      drawer: AppDrawer(),
       body: Padding(
         padding: EdgeInsets.all(8),
         child: ListView.builder(
