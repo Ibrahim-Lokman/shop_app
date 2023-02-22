@@ -126,6 +126,16 @@ class _EditProductScreenState extends State<EditProductScreen> {
           SizedBox(
             child: Text("ADD or EDIT PRODUCTS"),
           ),
+
+          /*
+          *****************************************************
+          *****************************************************
+
+          FORM VIEW in upper portion
+          
+          *****************************************************
+          *****************************************************
+          */
           Container(
             color: Color.fromARGB(255, 249, 183, 205),
             padding: const EdgeInsets.all(16.0),
@@ -279,6 +289,15 @@ class _EditProductScreenState extends State<EditProductScreen> {
               )
             ),
           ),
+          /*
+          *****************************************************
+          *****************************************************
+
+          LIST VIEW in lower portion
+          
+          *****************************************************
+          *****************************************************
+          */
           SizedBox(
             child: Text("ADDED PRODUCTS"),
           ),
