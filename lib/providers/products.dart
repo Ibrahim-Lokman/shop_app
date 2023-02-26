@@ -6,6 +6,7 @@ import './product.dart';
 
 class Products with ChangeNotifier {
   List<Product> _items = [
+    /*
     Product(
       id: 'p1',
       title: 'Red Shirt',
@@ -38,11 +39,12 @@ class Products with ChangeNotifier {
       imageUrl:
           'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Cast-Iron-Pan.jpg/1024px-Cast-Iron-Pan.jpg',
     ),
+  */
   ];
 
   //var _favoriteOnly = false;
 
-  List<Product> get items {
+  List <Product> get items {
    // if(_favoriteOnly) {
    //   return _items.where((prodItem) => prodItem.isFavorite).toList();
    // }
@@ -69,9 +71,36 @@ class Products with ChangeNotifier {
   }
 */
 
-  Future <void> addProduct(Product product) {
+  Future <void> fetchAndSetProducts () async {
    final url = Uri.https('shop-app-online-bc137-default-rtdb.firebaseio.com','/products.json');
-    return http.post(
+   
+   try {
+    final response = await http.get(url);
+    final extractedData = json.decode(response.body) as Map<String, dynamic>;
+    final List<Product> loadedProducts = [];
+    extractedData.forEach((prodId, prodData) {
+      loadedProducts.add(Product(
+        id: prodId, 
+        title: prodData['title'], 
+        description: prodData['description'], 
+        price: prodData['price'], 
+        isFavorite: prodData['isFavorite'], 
+        imageUrl: prodData['imageUrl'],
+        ));
+    });
+    _items = loadedProducts;
+    notifyListeners();
+   } catch(error) {
+    throw(error);
+   }
+  
+  
+  }
+
+  Future <void> addProduct(Product product) async {
+   final url = Uri.https('shop-app-online-bc137-default-rtdb.firebaseio.com','/products.json');
+   try{
+   final response =  await http.post(
       url, 
       body: json.encode(
       {
@@ -81,8 +110,8 @@ class Products with ChangeNotifier {
       'price': product.price,
       'isFavorite': product.isFavorite,
       }),
-      ).then((response) {
-      final newProduct = Product(
+    ); 
+    final newProduct = Product(
       title: product.title,
       description: product.description,
       price: product.price,
@@ -91,10 +120,11 @@ class Products with ChangeNotifier {
     );
     _items.add(newProduct);
     notifyListeners();
-  }).catchError((error) {
-    print(error);
-    throw error;
-  });
+   } catch (error) {
+   print(error);
+   throw error;
+   }
+
 }
 
   void updateProduct(String id, Product newProduct){
